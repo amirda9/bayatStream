@@ -103,9 +103,11 @@ export type LoggedInType = Node & {
   /** The ID of the object. */
   id: Scalars['ID'];
   user: UserType;
-  sessionKey?: Maybe<Scalars['String']>;
+  loggedInBefore: Scalars['Boolean'];
   streamLink?: Maybe<Scalars['String']>;
   ip?: Maybe<Scalars['String']>;
+  /** JWT tokens for the user get revoked when JWT id has regenerated. */
+  jti: Scalars['String'];
 };
 
 export type UserTypeConnection = {
@@ -140,7 +142,7 @@ export type UserTypeEdge = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  /** Obtain JSON Web Token mutation */
+  logoutUser?: Maybe<LogoutUser>;
   tokenAuth?: Maybe<ObtainJsonWebToken>;
   verifyToken?: Maybe<Verify>;
   refreshToken?: Maybe<Refresh>;
@@ -162,11 +164,16 @@ export type MutationRefreshTokenArgs = {
   token?: Maybe<Scalars['String']>;
 };
 
-/** Obtain JSON Web Token mutation */
+export type LogoutUser = {
+  __typename?: 'LogoutUser';
+  id?: Maybe<Scalars['ID']>;
+};
+
 export type ObtainJsonWebToken = {
   __typename?: 'ObtainJSONWebToken';
   payload: Scalars['GenericScalar'];
   refreshExpiresIn: Scalars['Int'];
+  user?: Maybe<UserType>;
   token: Scalars['String'];
 };
 
@@ -193,7 +200,25 @@ export type LoginMutation = (
   { __typename?: 'Mutation' }
   & { tokenAuth?: Maybe<(
     { __typename?: 'ObtainJSONWebToken' }
-    & Pick<ObtainJsonWebToken, 'payload' | 'token'>
+    & Pick<ObtainJsonWebToken, 'token' | 'payload'>
+    & { user?: Maybe<(
+      { __typename?: 'UserType' }
+      & { loggedInUser?: Maybe<(
+        { __typename?: 'LoggedInType' }
+        & Pick<LoggedInType, 'loggedInBefore' | 'streamLink'>
+      )> }
+    )> }
+  )> }
+);
+
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutMutation = (
+  { __typename?: 'Mutation' }
+  & { logoutUser?: Maybe<(
+    { __typename?: 'LogoutUser' }
+    & Pick<LogoutUser, 'id'>
   )> }
 );
 
@@ -213,8 +238,14 @@ export type VerifyMutation = (
 export const LoginDocument = gql`
     mutation login($username: String!, $password: String!) {
   tokenAuth(username: $username, password: $password) {
-    payload
     token
+    payload
+    user {
+      loggedInUser {
+        loggedInBefore
+        streamLink
+      }
+    }
   }
 }
     `;
@@ -224,6 +255,24 @@ export const LoginDocument = gql`
   })
   export class LoginGQL extends Apollo.Mutation<LoginMutation, LoginMutationVariables> {
     document = LoginDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const LogoutDocument = gql`
+    mutation logout {
+  logoutUser {
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class LogoutGQL extends Apollo.Mutation<LogoutMutation, LogoutMutationVariables> {
+    document = LogoutDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

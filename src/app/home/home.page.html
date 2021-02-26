@@ -1,8 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
+    <!-- <ion-buttons > -->
     <ion-title class="ion-text-center">
       Stream Page
     </ion-title>
+
+      <ion-button fill="clear" slot="end" style="color:wheat;" (click)="logout()">
+         <ion-label style="padding-right: 2px;">
+           Logout
+         </ion-label>
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    <!-- </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
@@ -19,12 +28,12 @@
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div> -->
 
-  <ion-row class="ion-text-center">
-    <ion-col class="ion-text-center">
+  <ion-row class="ion-text-center" class="ion-text-center">
+    <ion-col class="ion-text-center center-any" size-lg="6" offset-lg="3">
       <!-- <ion-button>a</ion-button> -->
       <!-- <div></div> -->
 
-      <video style="height: 40vh; width: 60vh; text-align: center;" id='plyrID' controls crossorigin playsinline poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
+      <video  id='plyrID' controls crossorigin playsinline poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg">
         <!-- <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
         <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720">
         <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4" size="1080">
@@ -38,6 +47,12 @@
     </video>
     </ion-col>
   </ion-row>
+
+  <!-- <ion-row>
+  <ion-button (click)="func()">
+    a
+  </ion-button>
+</ion-row> -->
   <!-- <ion-row>
     <ion-button (click)="My_function()">
       bayat

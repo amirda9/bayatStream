@@ -4,7 +4,7 @@ import {ApolloClientOptions,ApolloLink, InMemoryCache} from '@apollo/client/core
 import {HttpLink} from 'apollo-angular/http';
 import { setContext } from '@apollo/client/link/context';
 
-const uri = 'http://shaya.liara.run/graphql'; // <-- add the URL of the GraphQL server here
+const uri = 'https://shaya.liara.run/graphql'; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   const basic = setContext((operation, context) => ({
     headers: {
@@ -13,10 +13,10 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
   }));
   const auth = setContext((operation, context) => {
     const token = localStorage.getItem('AUTHTOKEN');
-
     if (token === null) {
       return {};
     } else {
+      // console.log("graph module")
       return {
         headers: {
           Authorization: `JWT ${token}`

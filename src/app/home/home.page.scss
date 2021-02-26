@@ -25,3 +25,15 @@
 #container a {
   text-decoration: none;
 }
+
+
+video{
+ max-width: 100%!important;
+ max-height: 100%!important;
+}
+
+
+ion-col.center-any{
+  display: flex;
+  justify-content: center;
+}

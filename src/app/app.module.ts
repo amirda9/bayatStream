@@ -15,20 +15,20 @@ import { GraphQLModule } from './graphql.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule,GraphQLModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {
-      provide: APOLLO_OPTIONS,
-      useFactory: (httpLink: HttpLink) => {
-        return {
-          cache: new InMemoryCache(),
-          link: httpLink.create({
-            uri: 'https://shaya.liara.run/graphql',
-          }),
-        };
-      },
-      deps: [HttpLink],
-    }
+    // {
+    //   provide: APOLLO_OPTIONS,
+    //   useFactory: (httpLink: HttpLink) => {
+    //     return {
+    //       cache: new InMemoryCache(),
+    //       link: httpLink.create({
+    //         uri: 'https://shaya.liara.run/graphql',
+    //       }),
+    //     };
+    //   },
+    //   deps: [HttpLink],
+    // }
   ],
   bootstrap: [AppComponent],
 })

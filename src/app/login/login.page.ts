@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { AUTHTOKEN } from '../constants';
+import { AUTHTOKEN, STREAMLINK } from '../constants';
 import { LoginGQL,LoginMutation } from 'src/generated/graphql';
 import { map } from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import { throwServerError } from '@apollo/client/core';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
+import { ModalPageComponent } from '../modal-page/modal-page.component';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginPage implements OnInit {
   is_TextFieldType : boolean = false;
   user:string;
   pass:string;
-  constructor(private router :Router , private loginGQL:LoginGQL) {
+  status:boolean=false;
+  constructor(private router :Router , private loginGQL:LoginGQL , private modal:ModalController) {
 
   }
 
@@ -36,6 +38,15 @@ export class LoginPage implements OnInit {
     this.is_TextFieldType = ! this.is_TextFieldType;
   }
 
+  async run_modal(){
+    const modal = await this.modal.create({
+      component: ModalPageComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+
   login(){
     this.loginGQL.mutate(
       {
@@ -47,8 +58,19 @@ export class LoginPage implements OnInit {
       {
         if(next.data.tokenAuth.token != null){
           let a = next.data.tokenAuth.token;
+          let b = next.data.tokenAuth.user.loggedInUser.streamLink;
           localStorage.setItem(AUTHTOKEN,a);
+          localStorage.setItem(STREAMLINK,b);
+          if(b != ""){
           this.router.navigate(['/home']);
+          }
+          else if(b == ""){
+            // this.status = true;
+            // let a = next.data.tokenAuth.token;
+            // localStorage.setItem(AUTHTOKEN,a);
+            this.run_modal()
+            // this.router.navigate(['/home']);
+          }
         }
       }
     )
