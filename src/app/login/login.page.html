@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title class="ion-text-center">login</ion-title>
+    <ion-title class="ion-text-center">ورود</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,10 +8,11 @@
   <ion-grid style="height: 100%;">
     <ion-row style="display: flex; align-items: center; justify-content: center; height: 100%;">
       <ion-col size-md="10" size-lg="5" size-xl="3">
+        <form #form="ngForm" (ngSubmit)="login()" (keydown)="keyDownFunction($event)">
   <ion-card style="margin-top: -2em;">
     <ion-card-header>
       <ion-title style="color: black;" class="ion-text-center">
-        Login Page
+        خوش آمدید
       </ion-title>
     </ion-card-header>
     <ion-row class="ion-padding-top ion-padding-horizontal">
@@ -22,7 +23,7 @@
       </ion-col>
     </ion-row>
     <ion-item  class="ion-padding-horizontal">
-      <ion-input  [(ngModel)]="user" placeholder="Username"></ion-input>
+      <ion-input  [(ngModel)]="user" name="user"></ion-input>
     </ion-item>
     <ion-row class="ion-padding-top ion-padding-horizontal">
       <ion-col class="ion-text-right">
@@ -33,19 +34,21 @@
     </ion-row>
     <!-- <ion-row class="ion-padding-horizontal"> -->
     <ion-item class="ion-padding-horizontal ion-padding-bottom">
-      <ion-input [(ngModel)]="pass" placeholder="Password" [type]="is_TextFieldType ? 'text' : 'password'"></ion-input>
+      <ion-input [(ngModel)]="pass" [type]="is_TextFieldType ? 'text' : 'password'" name="pass"></ion-input>
       <ion-icon style='color:#004a73'[name]="is_TextFieldType ? 'eye-off' : 'eye'" (click)="togglePasswordFieldType()"></ion-icon>
     </ion-item>
 
     <ion-row>
       <ion-col class="ion-text-center">
-        <ion-button (click)="login()">
-          Enter
+        <ion-button type="submit">
+          ورود
         </ion-button>
       </ion-col>
     </ion-row>
   </ion-card>
+</form>
 </ion-col>
 </ion-row>
 </ion-grid>
+
 </ion-content>

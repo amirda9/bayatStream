@@ -1,5 +1,5 @@
 overwrite: true
-schema: "https://shaya.liara.run/graphql"
+schema: "http://37.152.188.77/graphql"
 documents: "src/**/*.graphql"
 generates:
   src/generated/graphql.ts:

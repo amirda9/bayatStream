@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   user:string;
   pass:string;
   status:boolean=false;
-  constructor(private router :Router , private loginGQL:LoginGQL , private modal:ModalController) {
+  constructor(private router :Router , private loginGQL:LoginGQL , private modal:ModalController, private loadingController:LoadingController) {
 
   }
 
@@ -45,9 +45,19 @@ export class LoginPage implements OnInit {
     });
     return await modal.present();
   }
+  
+ async keyDownFunction(event) {
+    if (event.keyCode === 13) {
+      const loading = await this.loadingController.create({
+        message: 'در حال بارگزاری ...'
+        });
+        loading.present();
+      this.login()
+      loading.dismiss();
+    }
+  }
 
-
-  login(){
+ async login(){
     this.loginGQL.mutate(
       {
         username:this.user,

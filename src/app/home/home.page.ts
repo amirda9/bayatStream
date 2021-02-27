@@ -41,11 +41,11 @@ export class HomePage {
   verifytoken(){
     this.verifyGQL.mutate({
       token:localStorage.getItem(AUTHTOKEN)
-    }).subscribe(res=>
+    }).subscribe((res)=>
       {
-        return
+        console.log(res)
       },
-      error=>{
+      (error)=>{
         if(error != null){
           this.logout();
         }
