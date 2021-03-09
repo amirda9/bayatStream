@@ -1,22 +1,27 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <!-- <ion-buttons > -->
-    <ion-title class="ion-text-center">
-      Stream Page
+    <ion-title style="color: white;" class="ion-text-center">
+      پخش زنده
     </ion-title>
 
-      <ion-button fill="clear" slot="end" style="color:wheat;" (click)="logout()">
-         <ion-label style="padding-right: 2px;">
-           Logout
+      <ion-button fill="clear" slot="end"  (click)="logout()">
+         <ion-label style="color:white; padding-right: 2px;">
+           خروج
          </ion-label>
-        <ion-icon name="log-out-outline"></ion-icon>
+        <ion-icon name="log-out-outline" style="color: white;"></ion-icon>
       </ion-button>
     <!-- </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-grid>
+<!-- <ion-content  class="vertical-align-content">
+  <ion-grid style="height:90vh" > -->
+
+    <ion-content class="vertical-align-content">
+      <ion-grid  class="ion-margin">
+        <ion-row class="ion-justify-content-center">
+          <ion-col style="height:80vh" size="12">
   <!-- <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Blank</ion-title>
@@ -27,7 +32,20 @@
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
   </div> -->
-
+  <ion-row class="ion-padding-top">
+    <ion-col class="ion-text-center">
+      <ion-title>
+        سمینار آنلاین امیر بیات
+      </ion-title>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-padding-bottom">
+    <ion-col class="ion-text-center">
+      <ion-label>
+        موضوع امروز
+      </ion-label>
+    </ion-col>
+  </ion-row>
   <ion-row class="ion-text-center" class="ion-text-center">
     <ion-col class="ion-text-center center-any" size-lg="6" offset-lg="3">
       <!-- <ion-button>a</ion-button> -->
@@ -48,15 +66,72 @@
     </ion-col>
   </ion-row>
 
-  <!-- <ion-row>
-  <ion-button (click)="func()">
-    a
-  </ion-button>
-</ion-row> -->
-  <!-- <ion-row>
-    <ion-button (click)="My_function()">
-      bayat
-    </ion-button>
+
+  <ion-row class="ion-padding-vertical">
+    <ion-col class="ion-text-center">
+      <ion-label>
+           افراد حاضر در سمینار
+      </ion-label>
+
+      :{{count}}
+      <ion-label>
+        نفر
+     </ion-label>
+     <!-- <img style="height: 1vh; width: 1vh;" src="stream/assets/green_dot.png"> -->
+     <span class="dot"></span>
+    </ion-col>
+  </ion-row>
+
+  <ion-card>
+  <!-- <ion-row class="ion-padding-horizontal" style="padding-top: 1.5em;">
+    <ion-col>
+      <h2 style="--ion-background-color: #f6f6f6;"><span>موضوعات</span></h2>
+    </ion-col>
   </ion-row> -->
+  <ion-card-header>
+    <ion-title style="color:black;" class="ion-text-center">
+      سرفصل ها
+    </ion-title>
+  </ion-card-header>
+  <ion-row class="ion-padding">
+  <ion-slides  [options]="{centeredSlides:'true', slidesPerView: '2.2', zoom: false, grabCursor: true , initialSlide: 2}">
+    <ion-slide style="width: 40vw!important;">
+
+      <ion-label class="passed">
+        Task 1
+      </ion-label>
+
+    </ion-slide>
+    <ion-slide style="width: 40vw!important;">
+      <ion-label>
+        Task 2
+      </ion-label>
+    </ion-slide>
+    <ion-slide style="width: 40vw!important;">
+      <ion-label>
+        Task 3
+      </ion-label>
+    </ion-slide>
+    <ion-slide style="width: 40vw!important;">
+      <ion-label>
+        Task 4
+      </ion-label>
+    </ion-slide>
+  </ion-slides>
+</ion-row>
+</ion-card>
+  </ion-col>
+        </ion-row>
+
 </ion-grid>
+<!-- <ion-tabs>
+
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="conditions-list">
+      <ion-icon style='color:white;' name="keypad"></ion-icon>
+      <ion-label color="light">داشبورد</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+
+</ion-tabs> -->
 </ion-content>

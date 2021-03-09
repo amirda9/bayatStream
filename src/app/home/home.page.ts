@@ -7,6 +7,7 @@ import { LoadingController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { interval, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 
 
@@ -20,11 +21,12 @@ export class HomePage {
 
   login: Graph.LoginMutation['tokenAuth'];
   token:any;
+  count:number=27;
   status:boolean=true;
   subscription: Subscription;
-  constructor(private http : HttpClient,private verifyGQL:Graph.VerifyGQL,private loadingController:LoadingController,private authService:AuthService) {
+  constructor(private http : HttpClient,private verifyGQL:Graph.VerifyGQL,private loadingController:LoadingController,private authService:AuthService,private router:Router) {
     this.token = localStorage.getItem(AUTHTOKEN);
-    const source = interval(10000);
+    const source = interval(30000);
     this.subscription = source.subscribe(val => this.verifytoken());
   }
 
@@ -36,19 +38,19 @@ export class HomePage {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+    this.authService.logout();
   }
 
   verifytoken(){
     this.verifyGQL.mutate({
       token:localStorage.getItem(AUTHTOKEN)
-    }).subscribe((res)=>
+    }).subscribe(res=>
       {
         console.log(res)
       },
-      (error)=>{
-        if(error != null){
-          this.logout();
-        }
+      error=>{
+        // console.log("behnam");
+        this.router.navigate(['/login']);
       })
   }
 

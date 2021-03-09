@@ -28,10 +28,12 @@
     "graphql-codegen": "^0.4.0",
     "hls.js": "^0.14.17",
     "init": "^0.1.2",
+    "mongodb": "^3.6.4",
     "plyr": "^3.6.4",
     "plyr-resolution-selector": "0.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "zen-observable": "^0.8.15",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

@@ -77,6 +77,7 @@ $primary_font: 'IRANSansWebFaNum';
   --ion-color-light-tint: #f5f6f9;
 
   --ion-font-family :'IRANSansWebFaNum';
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -236,4 +237,33 @@ $primary_font: 'IRANSansWebFaNum';
 
     --ion-card-background: #1e1e1e;
   }
+}
+$app-direction: rtl;
+
+
+.my-custom-class .alert-message {
+  text-align: right;
+  font-size: 10pt;
+
+}
+.my-logout-class .alert-message {
+  text-align: center;
+  font-size: 10pt;
+}
+.my-logout-class .alert-button {
+  color: red;
+
+}
+.my-custom-class .alert-button-group {
+  justify-content: center;
+}
+.my-logout-class .alert-button-group {
+  justify-content: center;
+}
+.vertical-align-content
+{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  height: 100%;
 }
