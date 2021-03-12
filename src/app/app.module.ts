@@ -12,11 +12,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GraphQLModule } from './graphql.module';
 import { ModalPageComponent } from './modal-page/modal-page.component';
+import { SharedModuleModule } from './shared.module';
 
 @NgModule({
   declarations: [AppComponent,ModalPageComponent],
   entryComponents: [],
-  imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule,GraphQLModule],
+  imports: [BrowserModule,HttpClientModule, IonicModule.forRoot(), AppRoutingModule,GraphQLModule,SharedModuleModule],
   exports:[ModalPageComponent],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     // {

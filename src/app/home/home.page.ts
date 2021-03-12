@@ -26,14 +26,17 @@ export class HomePage {
   subscription: Subscription;
   constructor(private http : HttpClient,private verifyGQL:Graph.VerifyGQL,private loadingController:LoadingController,private authService:AuthService,private router:Router) {
     this.token = localStorage.getItem(AUTHTOKEN);
-    const source = interval(30000);
+    const source = interval(60000);
     this.subscription = source.subscribe(val => this.verifytoken());
   }
 
 
   public player;
   ngOnInit(){
-    this.func();
+    // this.func();
+
+
+
   }
 
   ngOnDestroy() {

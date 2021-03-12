@@ -1,0 +1,23 @@
+
+
+<ion-card >
+  <div *ngIf="time_rem">
+<ion-row dir="rtl" style="color: #000; font-size: 1.5em;">
+  <ion-col class="ion-text-center">
+  {{message}}
+</ion-col>
+</ion-row>
+<ion-row dir="rtl" style=" ">
+  <ion-col class="ion-text-center">
+  تا آغاز سمینار باقی مانده است .
+</ion-col>
+</ion-row>
+</div>
+<div *ngIf="!time_rem">
+  <ion-row dir="rtl" style=" ">
+    <ion-col class="ion-text-center">
+    سمینار در حال برگزاری می باشد.
+  </ion-col>
+  </ion-row>
+</div>
+</ion-card>
