@@ -3,11 +3,12 @@ import * as Graph from 'src/generated/graphql';
 import * as Plyr from 'plyr';
 import * as Hls from 'hls.js';
 import { AUTHTOKEN } from '../constants';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { interval, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { ModalPageComponent } from '../modal-page/modal-page.component';
 
 
 
@@ -24,7 +25,10 @@ export class HomePage {
   count:number=27;
   status:boolean=true;
   subscription: Subscription;
-  constructor(private http : HttpClient,private verifyGQL:Graph.VerifyGQL,private loadingController:LoadingController,private authService:AuthService,private router:Router) {
+  exit_dis:boolean=false;
+  constructor(private http : HttpClient,private verifyGQL:Graph.VerifyGQL,private loadingController:LoadingController,private authService:AuthService,private router:Router,
+    private modalController: ModalController) {
+
     this.token = localStorage.getItem(AUTHTOKEN);
     const source = interval(60000);
     this.subscription = source.subscribe(val => this.verifytoken());
@@ -33,7 +37,7 @@ export class HomePage {
 
   public player;
   ngOnInit(){
-    // this.func();
+    this.func();
 
 
 
@@ -41,24 +45,43 @@ export class HomePage {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-    this.authService.logout();
+    // this.authService.logout();
   }
 
   verifytoken(){
     this.verifyGQL.mutate({
       token:localStorage.getItem(AUTHTOKEN)
-    }).subscribe(res=>
+    }).subscribe(
+      async next=>
       {
-        console.log(res)
+        console.log("verified")
       },
-      error=>{
-        // console.log("behnam");
+      async errors=>{
+        this.authService.logout();
         this.router.navigate(['/login']);
       })
   }
 
-  logout(){
+  async download(){
+
+      const modal = await this.modalController.create({
+      component: ModalPageComponent,
+      });
+
+      await modal.present();
+
+
+  }
+
+  async logout(){
+    // const loading = await this.loadingController.create({
+    //   message: 'در حال بارگزاری ...'
+    //   });
+    //   loading.present();
+    this.exit_dis = true;
     this.authService.logout();
+    // this.exit_dis = false;
+    // loading.dismiss();
   }
 
   async  func(){
@@ -140,11 +163,10 @@ export class HomePage {
 
         else if(a==""){
           console.log("error")
-
-        }
-        loading.dismiss();
+          loading.dismiss();
         }
 
+        }
             });
 
 

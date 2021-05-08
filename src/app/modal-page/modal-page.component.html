@@ -1,14 +1,22 @@
-<!-- <ion-card> -->
-  <ion-row>
-    <ion-label class="ion-text-center">
-      log out
+<ion-header [translucent]="true">
+  <ion-toolbar class="ion-justify-content-center ion-text-center" >
+    <!-- <ion-buttons > -->
+      <!-- <ion-col class="ion-text-center"> -->
+
+      <div>
+    <ion-title style="margin-right: -3em; color: white;" class="ion-text-center">
+      <ion-label class="ion-text-center">
+        لینک دانلود
+      </ion-label>
+    </ion-title>
+  </div>
+  <ion-button fill="clear" slot="end"  (click)="close()">
+    <ion-label style="color:white; padding-right: 2px;">
+      بستن
     </ion-label>
-  </ion-row>
-<ion-row>
-  <ion-col class="ion-text-center">
-  <ion-button color="danger" (click)="logout()">
-    Log out
-  </ion-button>
-  </ion-col>
-</ion-row>
-<!-- </ion-card>> -->
+   <ion-icon name="close-outline" style="color: white;"></ion-icon>
+ </ion-button>
+  <!-- </ion-col> -->
+    <!-- </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>

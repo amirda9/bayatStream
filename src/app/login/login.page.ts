@@ -40,9 +40,11 @@ export class LoginPage implements OnInit {
       ).subscribe(
         res=>{
           this.router.navigate(['/home']);
+        },
+        errors => {
+          return
         }
       )
-      console.log("1");
     }
     else{
       return;
@@ -65,17 +67,16 @@ export class LoginPage implements OnInit {
 
  async keyDownFunction(event) {
     if (event.keyCode === 13) {
-      // const loading = await this.loadingController.create({
-      //   message: 'در حال بارگزاری ...'
-      //   });
-      //   loading.present();
-      // this.login()
-      // loading.dismiss();
       this.login();
     }
   }
 
  async login(){
+  const loading = await this.loadingController.create({
+    message: 'در حال بارگزاری ...'
+    });
+    loading.present();
+
     this.loginGQL.mutate(
       {
         username:this.user,
@@ -91,6 +92,7 @@ export class LoginPage implements OnInit {
           localStorage.setItem(AUTHTOKEN,a);
           localStorage.setItem(STREAMLINK,b);
           if(b != ""){
+            loading.dismiss();
           this.router.navigate(['/home']);
           }
           else if(b == ""){
@@ -98,6 +100,7 @@ export class LoginPage implements OnInit {
             // let a = next.data.tokenAuth.token;
             // localStorage.setItem(AUTHTOKEN,a);
             // this.run_modal()
+            loading.dismiss();
             const alert = await this.alertController.create({
               cssClass: 'my-logout-class',
               // header: 'Alert',
@@ -115,6 +118,7 @@ export class LoginPage implements OnInit {
       },
 
       async errors=>{
+        loading.dismiss();
         const alert = await this.alertController.create({
           cssClass: 'my-custom-class',
           // header: 'Alert',

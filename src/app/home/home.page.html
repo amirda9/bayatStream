@@ -10,7 +10,7 @@
       </ion-label>
     </ion-title>
   </div>
-  <ion-button fill="clear" slot="end"  (click)="logout()" >
+  <ion-button fill="clear" slot="end"  (click)="logout()" [disabled]="exit_dis ? '' : null">
     <ion-label style="color:white; padding-right: 2px;">
       خروج
     </ion-label>
@@ -64,7 +64,7 @@
       <!-- <ion-button>a</ion-button> -->
       <!-- <div></div> -->
 
-      <video  id='plyrID' controls crossorigin playsinline poster="https://www.amirbayat.com/wp-content/uploads/2021/03/Horizontal-1.jpg">
+      <video  id='plyrID' controls crossorigin playsinline poster="../../assets/poster.jpg">
         <!-- <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" type="video/mp4" size="576">
         <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4" type="video/mp4" size="720">
         <source src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4" type="video/mp4" size="1080">
@@ -135,6 +135,22 @@
 </ion-card>
 </ion-col>
   </ion-row> -->
+  <ion-row class="ion-padding ion-justify-content-center">
+    <ion-col size-lg="6" class="ion-text-center">
+      <!-- <ion-card> -->
+        <!-- <ion-row class="ion-justify-content-center"> -->
+          <!-- <ion-col class="ion-text-center vertical-align-content"> -->
+            <ion-button style="--background:#e0aa23;" (click)="download()">
+              <ion-icon name="download"></ion-icon>لینک دانلود
+            </ion-button>
+
+          <!-- </ion-col> -->
+        <!-- </ion-row> -->
+      <!-- </ion-card> -->
+    </ion-col>
+  </ion-row>
+
+
   </ion-col>
         </ion-row>
 

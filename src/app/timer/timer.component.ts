@@ -12,7 +12,7 @@ export class TimerComponent implements OnInit {
     private futureString: string;
     private counter$: Observable<number>;
     private subscription: Subscription;
-    private message: string;
+    public message: string;
 
     constructor(elm: ElementRef) {
         this.futureString = elm.nativeElement.getAttribute('inputDate');
@@ -57,7 +57,6 @@ export class TimerComponent implements OnInit {
     }
 
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
     }
 
 
